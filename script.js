@@ -1,7 +1,7 @@
 function animate() {
-  var radius = 350; // how big of the radius
+  var radius = 360; // how big of the radius
   var autoRotate = true; // auto rotate or not
-  var rotateSpeed = -60; // unit: seconds/360 degrees
+  var rotateSpeed = -45; // unit: seconds/360 degrees
   var imgWidth = 150; // width of images (unit: px)
   var imgHeight = 200; // height of images (unit: px)
   
@@ -36,7 +36,7 @@ function animate() {
         "deg) translateZ(" +
         radius +
         "px)";
-      aEle[i].style.transition = "transform 1s";
+      aEle[i].style.transition = "transform 3s";
       aEle[i].style.transitionDelay = delayTime || (aEle.length - i) / 4 + "s";
     }
   }
@@ -139,11 +139,26 @@ window.addEventListener("load", () => {
 });
 
 startButton.addEventListener("click", (e) => {
+  updateText(3);
+})
+
+function start() {
   drag_container.style.display = "block";
   initial_container.style.display = "none";
   animate();
   document.getElementById("audio").play();
   document.getElementById("audio").style.display = "none"
-})
+}
+
+function updateText(num) {
+  if (num == 0) {
+    start();
+  }
+  const text = "Waiting " + num + "s";
+  startButton.textContent = text;
+  setTimeout(() => {updateText(num - 1)}, 1000);
+}
+
+
 
 
